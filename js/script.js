@@ -8,7 +8,7 @@ var template;
 
 // set what you must
 const settings = {
-    websocketURL: "ws://localhost:18080/",
+    websocketURL: "ws://localhost:8080/",
     stringDefaultPollEnd: "Poll endet mit ",
 };
 
