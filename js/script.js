@@ -9,7 +9,11 @@ var template;
 // set what you must
 const settings = {
     websocketURL: "ws://localhost:8080/",
-    stringDefaultPollEnd: "Poll endet mit ",
+    stringDefaultPollEnd: "insgesamt", // final message
+    stringDefaultVoteName: "Stimme", // singular
+    stringDefaultVoteNames: "Stimmen", // plural
+    stringDefaultQuickVote1: "Ja", // text for quickvote
+    stringDefaultQuickVote2: "Nein", // text for quickvote
 };
 
 window.addEventListener('load', (event) => {
@@ -19,7 +23,6 @@ window.addEventListener('load', (event) => {
 
 function connectws() {
     if ("WebSocket" in window) {
-        //ws = new WebSocket("ws://localhost:18080/");
         ws = new WebSocket(settings.websocketURL);
         bindEvents();
         console.log('Websocket connected.');
@@ -80,6 +83,10 @@ function pollStarted() {
     poll.choices.forEach(choice => {
         index++;
         choice.index = index;
+        if (choice === "Nummer1")
+            choice = settings.stringDefaultQuickVote1;
+        if (choice === "Nummer2")
+            choice = settings.stringDefaultQuickVote2;
         console.log(choice +" "+ index);
         let entry = createElement('div', { 'class': 'entry' });
         let choice_index = createElement('span', {'class': 'choice-index'});
@@ -103,6 +110,7 @@ function pollUpdated() {
 
     var voteBar = document.getElementById("choice-bar-" + poll.vote);
     voteBar.innerHTML = parseInt(document.getElementById("choice-bar-" + poll.vote).innerHTML) + 1;
+    //voteBar.setAttribute("style", "color:black");
 
     var bar = document.getElementById("choice-bar-" + poll.vote);
     var widthVal = parseInt(bar.style.width, 10);
@@ -111,9 +119,13 @@ function pollUpdated() {
 
 function pollStop(){
     var infoBar = document.getElementById("finally");
-    infoBar.innerHTML = settings.stringDefaultPollEnd + totalVotes + " Vote(s).";
+
+    let voteName = settings.stringDefaultVoteNames;
+    if (totalVotes === 1)
+        voteName = settings.stringDefaultVoteName;
+    infoBar.innerHTML = settings.stringDefaultPollEnd + " " + totalVotes + " " + voteName + ".";
     infoBar.setAttribute("class", "animate__animated animate__repeat-1 animate__zoomIn");
-    // animate__zoomOut
+
     var poll = document.getElementById("poll");
     poll.setAttribute("class", "animate__animated animate__repeat-1 animate__delay-5s animate__zoomOut");
 }

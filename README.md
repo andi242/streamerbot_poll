@@ -15,7 +15,11 @@
     - ungültige votes werden gefiltert
     - jeder nur 1 Vote
 - `!pollstop`: beende poll
+- Kommentare/Anleitung im Chat erfolgt über einen Bot Account via SB
 
 ## Gif
 
 ![demo](./res/poll.gif)
+
+##
+
