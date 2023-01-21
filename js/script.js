@@ -20,7 +20,6 @@ window.addEventListener('load', (event) => {
     connectws();
 });
 
-
 function connectws() {
     if ("WebSocket" in window) {
         ws = new WebSocket(settings.websocketURL);
@@ -110,7 +109,6 @@ function pollUpdated() {
 
     var voteBar = document.getElementById("choice-bar-" + poll.vote);
     voteBar.innerHTML = parseInt(document.getElementById("choice-bar-" + poll.vote).innerHTML) + 1;
-    //voteBar.setAttribute("style", "color:black");
 
     var bar = document.getElementById("choice-bar-" + poll.vote);
     var widthVal = parseInt(bar.style.width, 10);

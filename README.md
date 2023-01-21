@@ -4,6 +4,7 @@
 1. `index.html` als browser source in OBS hinzufügen
 1. importiere [file](./sb_import.sb) in SB für actions/commands
 1. browser source in den SB actions anpassen
+1. ggf. Optionen im [script.js](./js/script.js) anpassen
 
 ## twitch chat commands
 
@@ -21,5 +22,6 @@
 
 ![demo](./res/poll.gif)
 
-##
+## credits
 
+Inspiriert von [BlackyWhoElse](https://github.com/BlackyWhoElse/streamer.bot-actions)
