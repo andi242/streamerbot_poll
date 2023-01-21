@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polls</title>
+    <script src="js/script.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;1,700&display=swap"  rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+    <style>
+        html,
+        body {
+            background: #00000097;
+            padding: 0;
+            overflow: hidden;
+            margin: 0px;
+            height: 100%;
+            width: 100%;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.5rem;
+            color: white;
+        }
+        .entry {
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+        .choice-text {
+            min-width: 8.5rem;
+            display: inline-table;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        .choice-index {
+            min-width: 1rem;
+            display: inline-table;
+            background-color: rgb(252,163,17);
+            border-radius: 4px;
+            text-align: center;
+            color: black;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .progress-bar {	
+            height: max-content;
+            background-color: #b17f27;
+            text-align:center;
+            display:inline-block;
+            border-radius: 4px;
+            transition: 0.4s linear;  
+            transition-property: width, background-color;  
+            background-image: linear-gradient(
+                    45deg, rgb(252,163,17) 25%, 
+                    transparent 25%, transparent 50%, 
+                    rgb(252,163,17) 50%, rgb(252,163,17) 75%,
+                    transparent 75%, transparent);  
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div id="poll" class="poll animate__animated animate__repeat-1 animate__delay-2s animate__zoomIn">
+        <h2 id="title" class="title"></h2>
+        <div id="entries" class="entries"></div>
+        <div id="totalvotes" class="totalvotes"></div>
+        <div id="finally" class="finally"></div>
+    </div>
+</body>
+
+</html>
