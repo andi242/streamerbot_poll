@@ -2,14 +2,14 @@
 var poll;
 
 var title;
-var duration;
+var totalChoices=0;
 var totalVotes=0;
 var template;
 
 // set what you must
 const settings = {
     websocketURL: "ws://localhost:8080/",
-    stringDefaultPollEnd: "insgesamt", // final message
+    stringDefaultPollEnd: "Ergebnis mit", // final message
     stringDefaultVoteName: "Stimme", // singular
     stringDefaultVoteNames: "Stimmen", // plural
     stringDefaultQuickVote1: "Ja", // text for quickvote
@@ -105,14 +105,30 @@ function pollStarted() {
 
 function pollUpdated() {
     console.log(poll.vote);
-    totalVotes = totalVotes + 1;
+    if (poll.decreaseVote === 0){
+        totalVotes = totalVotes + 1;
+        
+        var voteBar = document.getElementById("choice-bar-" + poll.vote);
+        voteBar.innerHTML = parseInt(document.getElementById("choice-bar-" + poll.vote).innerHTML) + 1;
 
-    var voteBar = document.getElementById("choice-bar-" + poll.vote);
-    voteBar.innerHTML = parseInt(document.getElementById("choice-bar-" + poll.vote).innerHTML) + 1;
+        var bar = document.getElementById("choice-bar-" + poll.vote);
+        var widthVal = parseInt(bar.style.width, 10);
+        bar.style.width = (widthVal + 40) + "px";
+    } else {
+        var voteBar = document.getElementById("choice-bar-" + poll.vote);
+        voteBar.innerHTML = parseInt(document.getElementById("choice-bar-" + poll.vote).innerHTML) + 1;
 
-    var bar = document.getElementById("choice-bar-" + poll.vote);
-    var widthVal = parseInt(bar.style.width, 10);
-    bar.style.width = (widthVal + 40) + "px";
+        var unvoteBar = document.getElementById("choice-bar-" + poll.decreaseVote);
+        unvoteBar.innerHTML = parseInt(document.getElementById("choice-bar-" + poll.decreaseVote).innerHTML) - 1;
+
+        var bar = document.getElementById("choice-bar-" + poll.vote);
+        var widthVal = parseInt(bar.style.width, 10);
+        bar.style.width = (widthVal + 40) + "px";
+
+        var unbar = document.getElementById("choice-bar-" + poll.decreaseVote);
+        var unbarwidthVal = parseInt(unbar.style.width, 10);
+        unbar.style.width = (unbarwidthVal - 40) + "px";
+    }
 }
 
 function pollStop(){
@@ -141,11 +157,6 @@ function pollClear() {
         docEntries.removeChild(docEntries.firstChild);
     }
 }
-
-function percentage(partialValue, totalValue) {
-    return Math.round((100 * partialValue) / totalValue);
-}
-
 function createElement(tag, attributes, text) {
     let element = document.createElement(tag);
     
